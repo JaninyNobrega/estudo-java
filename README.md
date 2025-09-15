@@ -37,7 +37,7 @@ Para executar este projeto, você precisa ter o **Java Development Kit (JDK)** i
 1.  **Clone o repositório:**
     ```bash
     git clone [https://github.com/JaninyNobrega/estudo-java.git](https://github.com/JaninyNobrega/estudo-java.git)
-    cd NomeDoSeuRepositorio
+    cd estudo-java
     ```
 2.  **Abra o projeto:** Use uma IDE como **VS Code** ou IntelliJ IDEA para abrir a pasta do projeto.
 3.  **Execute a classe principal:** Rode a classe `Principal.java`. O resultado será impresso diretamente no terminal ou console da sua IDE.
