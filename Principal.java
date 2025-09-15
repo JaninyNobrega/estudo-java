@@ -7,7 +7,6 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -17,7 +16,6 @@ public class Principal {
 
     public static void main(String[] args) {
 
-        // 3.1 - Inserir todos os funcionários
         List<Funcionario> funcionarios = new ArrayList<>();
         funcionarios.add(new Funcionario("Maria", LocalDate.of(2000, 10, 18), new BigDecimal("2009.44"), "Operador"));
         funcionarios.add(new Funcionario("João", LocalDate.of(1990, 5, 12), new BigDecimal("2284.38"), "Operador"));
@@ -34,18 +32,15 @@ public class Principal {
         imprimirFuncionarios(funcionarios);
         System.out.println();
 
-        // 3.2 - Remover o funcionário "João"
         funcionarios.removeIf(f -> f.getNome().equals("João"));
         
         System.out.println("--- 3.2 - Remoção de 'João' Concluída ---");
         System.out.println();
         
-        // 3.3 - Imprimir todos os funcionários (com "João" removido)
         System.out.println("--- 3.3 - Lista de Funcionários Atualizada ---");
         imprimirFuncionarios(funcionarios);
         System.out.println();
 
-        // 3.4 - Aumento de 10%
         BigDecimal aumento = new BigDecimal("1.10");
         funcionarios.forEach(f -> f.setSalario(f.getSalario().multiply(aumento)));
         
@@ -53,14 +48,12 @@ public class Principal {
         imprimirFuncionarios(funcionarios);
         System.out.println();
 
-        // 3.5 - Agrupar os funcionários por função
         Map<String, List<Funcionario>> funcionariosPorFuncao = funcionarios.stream()
                 .collect(Collectors.groupingBy(Funcionario::getFuncao));
         
         System.out.println("--- 3.5 - Agrupamento por Função Concluído ---");
         System.out.println();
 
-        // 3.6 - Imprimir os funcionários agrupados por função
         System.out.println("--- 3.6 - Funcionários Agrupados por Função ---");
         funcionariosPorFuncao.forEach((funcao, lista) -> {
             System.out.println("-> Função: " + funcao);
@@ -68,14 +61,12 @@ public class Principal {
         });
         System.out.println();
 
-        // 3.8 - Imprimir funcionários que fazem aniversário nos meses 10 e 12
         System.out.println("--- 3.8 - Aniversariantes de Outubro (10) e Dezembro (12) ---");
         funcionarios.stream()
                 .filter(f -> f.getDataNascimento().getMonthValue() == 10 || f.getDataNascimento().getMonthValue() == 12)
                 .forEach(f -> System.out.println("Nome: " + f.getNome() + ", Data de Aniversário: " + f.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
         System.out.println();
 
-        // 3.9 - Imprimir o funcionário com a maior idade
         System.out.println("--- 3.9 - Funcionário com a Maior Idade ---");
         Funcionario maisVelho = funcionarios.stream()
                 .max(Comparator.comparingInt(f -> Period.between(f.getDataNascimento(), LocalDate.now()).getYears()))
@@ -87,14 +78,12 @@ public class Principal {
         }
         System.out.println();
         
-        // 3.10 - Imprimir a lista de funcionários por ordem alfabética
         System.out.println("--- 3.10 - Funcionários em Ordem Alfabética ---");
         funcionarios.stream()
                 .sorted(Comparator.comparing(Pessoa::getNome))
                 .forEach(f -> System.out.println(f.getNome()));
         System.out.println();
         
-        // 3.11 - Imprimir o total dos salários
         System.out.println("--- 3.11 - Total dos Salários ---");
         BigDecimal totalSalarios = funcionarios.stream()
                 .map(Funcionario::getSalario)
@@ -102,7 +91,6 @@ public class Principal {
         System.out.println("Total: " + formatarValor(totalSalarios));
         System.out.println();
 
-        // 3.12 - Imprimir quantos salários mínimos cada funcionário ganha
         System.out.println("--- 3.12 - Salários Mínimos por Funcionário ---");
         BigDecimal salarioMinimo = new BigDecimal("1212.00");
         funcionarios.forEach(f -> {
@@ -111,9 +99,6 @@ public class Principal {
         });
     }
 
-    /**
-     * Método utilitário para imprimir os funcionários com formatação.
-     */
     private static void imprimirFuncionarios(List<Funcionario> lista) {
         for (Funcionario f : lista) {
             System.out.println("Nome: " + f.getNome() + 
@@ -123,9 +108,6 @@ public class Principal {
         }
     }
 
-    /**
-     * Método utilitário para formatar valores numéricos.
-     */
     private static String formatarValor(BigDecimal valor) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("pt", "BR"));
         symbols.setDecimalSeparator(',');
